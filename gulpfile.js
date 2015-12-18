@@ -20,10 +20,10 @@ gulp.task('clean', ['clean'], function() {
   return gulp.src(['tmp/','dist/'], {read: false})
     .pipe(clean());
 });
-gulp.task('serve', ['build'], function() {
+gulp.task('serve', function() {
   gulp.src('dist')
     .pipe(webserver({
       livereload:true
     }));
 });
-gulp.task('default', ['serve']);
+gulp.task('default', ['build', 'serve']);
