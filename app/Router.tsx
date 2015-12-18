@@ -14,6 +14,11 @@ interface IState {
 
 const history = createHashHistory();
 
+//function requireAuth(nextState:any, replaceState:any) {
+//  if (!auth.loggedIn())
+//    replaceState({ nextPathname: nextState.location.pathname }, '/login')
+//}
+
 export default class MyRouter extends React.Component<IProps, IState> {
   render() {
     return (<Router history={history}>

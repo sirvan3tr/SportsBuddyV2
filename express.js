@@ -1,9 +1,13 @@
 var express = require('express');
-var path = require('path');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var FBsecret = require('./FBsecret');
+var logger = require('morgan');
 var session = require('express-session');
+var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
+var methodOverride = require('method-override');
+var path = require('path');
+var FBsecret = require('./FBsecret');
 
 var app = express();
 
@@ -26,16 +30,28 @@ passport.use(new FacebookStrategy({
     //  return done(err, user);
     //});
     console.log(profile.displayName);
-    done(null, profile);
+    console.log(done(null, profile));
   }
 ));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(logger());
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(methodOverride());
 app.use(session({ secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true
   }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.json({ user: req.user });
+});
+
+app.get('/isAuthenticated', function(req, res) {
+  res.json({auth : req.isAuthenticated()});
+});
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'),
@@ -50,7 +66,7 @@ app.get('/auth/facebook',
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  passport.authenticate('facebook', { failureRedirect: '/public/#/login' }),
   function(req, res) {
     res.redirect('/#/');
   });
@@ -72,5 +88,11 @@ var server = app.listen(3000, "localhost", function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  console.log("Not Authenticated");
+  res.redirect('/public/#/login');
+}
 
 module.exports = app;
