@@ -10,7 +10,12 @@
   "files": [
     "app/Router.tsx",
     "app/App.tsx",
-    "app/Container.tsx",
+    "app/views/Container.tsx",
+    "app/views/About.tsx",
+    "app/views/Footer.tsx",
+    "app/views/Header.tsx",
+    "app/views/Home.tsx",
+    "app/views/Header/NavbarHeader.tsx",
     "typings/tsd.d.ts"
   ]
 }

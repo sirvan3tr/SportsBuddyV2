@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Container from './Container';
-import Home from './Home';
-import About from './About';
+import Container from './views/Container';
+import Home from './views/Home';
+import About from './views/About';
 import { Router, Route, IndexRoute, Link } from 'react-router';
 import { createHistory, useBasename } from 'history';
 
