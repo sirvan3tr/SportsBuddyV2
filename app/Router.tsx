@@ -3,7 +3,7 @@ import Container from './views/Container';
 import Home from './views/Home';
 import About from './views/About';
 import { Router, Route, IndexRoute, Link } from 'react-router';
-import { createHistory, useBasename } from 'history';
+import { createHashHistory } from 'history';
 
 interface IProps {
 }
@@ -11,9 +11,7 @@ interface IProps {
 interface IState {
 }
 
-const history = useBasename(createHistory)({
-  basename: '/breadcrumbs'
-});
+const history = createHashHistory();
 
 export default class MyRouter extends React.Component<IProps, IState> {
   render() {
