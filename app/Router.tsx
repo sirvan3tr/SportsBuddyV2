@@ -2,7 +2,7 @@ import * as React from 'react';
 import Container from './views/Container';
 import Home from './views/Home';
 import About from './views/About';
-import About from './views/Login';
+import Login from './views/Login';
 import { Router, Route, IndexRoute, Link } from 'react-router';
 import { createHashHistory } from 'history';
 
