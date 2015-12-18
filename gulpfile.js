@@ -10,7 +10,7 @@ gulp.task('build', ['compile'], function() {
     .pipe(gulp.dest('dist/'));
 });
 gulp.task('compile', function(){
-  gulp.src(["app/Router.tsx", "app/App.tsx", "typings/tsd.d.ts"])
+  gulp.src(["app/App.tsx", "typings/tsd.d.ts"])
     .pipe(typescript({
       additionalTscParameters: ['--jsx', 'react']
     }))
