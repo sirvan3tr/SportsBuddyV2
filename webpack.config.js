@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   output: {
-    filename: 'bundle.js'
+    filename: 'public/bundle.js'
   },
   resolve: {
     alias: {
@@ -34,7 +34,8 @@ module.exports = {
       new HtmlWebpackPlugin({
         title: "Shared Todo App",
         templateContent: "<!DOCTYPE html><html><head><script src=\"https://code.jquery.com/jquery-2.1.4.min.js\"></script><meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\"/><title>{%= o.htmlWebpackPlugin.options.title %}</title></head><body><div class=\"container\" id=\"container\"></div></body></html>",
-        inject: "body"
+        inject: "body",
+        filename: "public/index.html"
       }),
       new ExtractTextPlugin('public/main.css', {
           allChunks: true
@@ -48,4 +49,3 @@ module.exports = {
     "jquery": "jQuery"
   }
 };
-

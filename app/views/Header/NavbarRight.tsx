@@ -12,6 +12,7 @@ export default class NavbarHeader extends React.Component<IProps, IState> {
     return (
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/about">About</Link></li>
+        <li><Link to="/login">About</Link></li>
         <li className="dropdown">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Invalid Dropdown<span className="caret"></span></a>
           <ul className="dropdown-menu">

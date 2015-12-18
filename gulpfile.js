@@ -3,6 +3,7 @@ var webpack = require('webpack-stream');
 var webserver = require('gulp-webserver');
 var typescript = require('gulp-tsc');
 var clean = require('gulp-clean');
+var server = require('gulp-express');
 
 gulp.task('build', ['compile'], function() {
   return gulp.src(['tmp/App.js', "bootstrap-sass!./bootstrap-sass.config.js", "stylesheets/main.scss", "node_modules/jquery/dist/jquery.js", "node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"])
@@ -19,6 +20,10 @@ gulp.task('compile', function(){
 gulp.task('clean', ['clean'], function() {
   return gulp.src(['tmp/','dist/'], {read: false})
     .pipe(clean());
+});
+gulp.task('server', function () {
+    // Start the server at the beginning of the task
+    server.run(['express.js']);
 });
 gulp.task('serve', function() {
   gulp.src('dist')
