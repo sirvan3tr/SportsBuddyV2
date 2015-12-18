@@ -25,7 +25,8 @@ export default class Home extends React.Component<IProps, IState> {
     else {
       loggedInOut = <div><a href="/auth/facebook">Login</a></div>;
     }
-    return (<div></div>
+    return (
+      <div>{loggedInOut}</div>
     );
   }
 }
