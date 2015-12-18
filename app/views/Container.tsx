@@ -12,7 +12,17 @@ interface IState {
 export default class Container extends React.Component<IProps, IState> {
   render() {
     return (
-      <div><Header />{this.props.children}<Footer /></div>
+      <div>
+        <Header />
+        <div className="panel panel-default">
+          <div className="panel-body">
+            {this.props.children}
+          </div>
+          <div className="panel-footer">
+            <Footer />
+          </div>
+        </div>
+      </div>
     );
   }
 }
