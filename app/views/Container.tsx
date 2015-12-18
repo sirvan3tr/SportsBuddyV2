@@ -14,14 +14,9 @@ export default class Container extends React.Component<IProps, IState> {
     return (
       <div>
         <Header />
-        <div className="panel panel-default">
-          <div className="panel-body">
-            {this.props.children}
-          </div>
-          <div className="panel-footer">
-            <Footer />
-          </div>
-        </div>
+        {this.props.children}
+        <hr></hr>
+        <Footer />
       </div>
     );
   }
