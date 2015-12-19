@@ -1,14 +1,16 @@
-var express = require('express');
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var logger = require('morgan');
-var session = require('express-session');
-var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
-var methodOverride = require('method-override');
-var path = require('path');
-var FBsecret = require('./FBsecret');
+import * as express from 'express';
+import * as passport from 'passport';
+import {Strategy} from 'passport-facebook';
+import * as logger from 'morgan';
+import * as session from 'express-session';
+import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
+import * as methodOverride from 'method-override';
+import * as path from 'path';
+import FBsecret from './FBsecret';
+import * as mongoose from 'mongoose';
 
+mongoose.connect('mongodb://localhost/sportsbuddy');
 var app = express();
 
 passport.serializeUser(function(user, done) {
@@ -19,7 +21,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-passport.use(new FacebookStrategy({
+passport.use(new Strategy({
     clientID: FBsecret.FACEBOOK_APP_ID,
     clientSecret: FBsecret.FACEBOOK_APP_SECRET,
     callbackURL: "http://localhost:3000/auth/facebook/callback",
@@ -34,7 +36,7 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-app.use(logger());
+app.use(logger('combined'));
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride());
@@ -75,8 +77,8 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
-
-app.use("/public", express.static(__dirname + '/dist/public'));
+console.log(__dirname);
+app.use("/public", express.static(__dirname + '/../client/public'));
 
 app.get("/", function(request, response) {
     response.redirect('/public');
@@ -89,7 +91,7 @@ var server = app.listen(3000, "localhost", function () {
   console.log('Example app listening at http://%s:%s', host, port);
 });
 
-function ensureAuthenticated(req, res, next) {
+function ensureAuthenticated(req: express.Request, res:express.Response, next: Function) {
   if (req.isAuthenticated()) { return next(); }
   console.log("Not Authenticated");
   res.redirect('/public/#/login');

@@ -19,6 +19,8 @@
     "app/views/Header/NavbarHeader.tsx",
     "app/views/Header/NavbarLefttsx",
     "app/views/Header/NavbarRight.tsx",
+    "app/express.ts",
+    "app/FBsecret.ts",
     "typings/tsd.d.ts"
   ]
 }

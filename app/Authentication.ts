@@ -1,7 +1,7 @@
 import $ = require('jquery');
 export default class Authentication {
   logged : boolean;
-  logged_timeout : number;
+  logged_timeout : NodeJS.Timer;
   logged_inTime : boolean;
   constructor() {
     this.logged = false;
